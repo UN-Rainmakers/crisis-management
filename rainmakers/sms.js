@@ -1,3 +1,7 @@
+module.exports = {
+  hello: function () {
+setInterval(function() {
+
 //Reads twilio sms list, publishes to database and sends an sms response if needed
 
 // Twilio Credentials 
@@ -5,7 +9,7 @@ var account_sid = 'AC0f2e76413be85bfc363359ea65ef9c98';
 var auth_token = 'ebf41d784f99e4a0be4a2ae67aa36266'; 
  
 //require the Twilio module and create a REST client 
-var client = require('../lib')(account_sid, auth_token); 
+var client = require('twilio')(account_sid, auth_token); 
 var request = require('request');
 var querystring = require('querystring');
 var http = require('http');
@@ -83,5 +87,9 @@ client.messages.list({
        }
     }
 });
+console.log('Hello');
+}, 2000);
 
+       },
+    };
 

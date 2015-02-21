@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var index_routes = require('./routes/index');
 var users = require('./routes/users');
-var constantcomment = require('./doodles');
+var constantcomment = require('./sms');
 
 constantcomment.hello();
 var app = express();
