@@ -79,7 +79,7 @@ client.messages.list({
                 to: key,
                 from: twilioNum,
             }, function(err, message) {
-                process.stdout.write(err);
+                process.stdout.write(message.sid);
             });
        }
        else{
