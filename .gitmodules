@@ -1,0 +1,3 @@
+[submodule "twilio-node"]
+	path = twilio-node
+	url = https://github.com/twilio/twilio-node.git
