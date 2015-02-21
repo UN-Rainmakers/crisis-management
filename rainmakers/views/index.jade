@@ -1,5 +1,153 @@
-extends layout
+doctype html
+//
+  A Design by W3layouts
+  Author: W3layout
+  Author URL: http://w3layouts.com
+  License: Creative Commons Attribution 3.0 Unported
+  License URL: http://creativecommons.org/licenses/by/3.0/
+html
+  head
+    title The Rainmakers
+    link(href='stylesheets/bootstrap.css', rel='stylesheet', type='text/css', media='all')
+    // jQuery (necessary for Bootstrap's JavaScript plugins)
+    script(src='javascripts/jquery.min.js')
+    // Custom Theme files
+    // theme-style
+    link(href='stylesheets/style.css', rel='stylesheet', type='text/css', media='all')
+    // //theme-style
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    script(type='application/x-javascript').
+      addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+    // fonts
+    link(href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700', rel='stylesheet', type='text/css')
+    // //fonts
+  body
+    // header
+    // banner
+    script(src='javascripts/responsiveslides.min.js')
+    |         
+    script.
+      $(function () {
+      $("#slider").responsiveSlides({
+      auto: true,
+      speed: 500,
+      namespace: "callbacks",
+      pager: true,
+      });
+      });
+    |         
+    .slider
+      .callbacks_container
+        ul#slider.rslides
+          li
+            img(src='images/banner.jpg', alt='')
+            |                   
+            .banner
+              h2 Give a Helping hand
+              |                                 
+              p
+                | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+          |                 
+          li
+            img(src='images/banner2.jpg', alt='')
+            |                          
+            .banner
+              h2 Give a Helping hand
+              |                                 
+              p
+                | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+          |                 
+          li
+            img(src='images/banner.jpg', alt='')
+            |                  
+            .banner
+              h2 Give a Helping hand
+              |                                 
+              p
+                | Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+    // header
+    .header
+      .container
+        .logo
+          a(href='index.html')
+            img(src='images/logo.png', alt=' ')
+        |                                 
+        .top-nav
+          span.menu  
+          |                                         
+          ul
+            li.active
+              a.scroll(href='index.html') HOME 
+            |                                                 
+            li
+              a.scroll(href='feedback.html') FEEDBACK
+          // script
+          script.
+            $("span.menu").click(function(){
+            $(".top-nav ul").slideToggle(500, function(){
+            });
+            });
+        |                                 
+        .clearfix  
+    // 
+    // content
+    .content
+      .container
+        .donate
+          .donate-grid
+            p Chart and maps go here
+          |                                         
+          .sit-in
+            .col-md-4.ad-in
+              h5 Mirum est notare
+              |                                                         
+              p
+                | Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu
+              |                                                         
+              p
+                | Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
+            |                                                 
+            .col-md-4.ad-in
+              h5 Mirum est notare
+              |                                                         
+              p
+                | Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu
+              |                          
+              p
+                | Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
+            |                                                 
+            .clearfix  
+      // 
+      script(src='js/jquery.wmuSlider.js')
+      |                           
+      script.
+        $('.example1').wmuSlider({
+        pagination : false,
+        });
+    // footer
+    .footer
+      .container
+        span.drop  
+        |                         
+        p
+          | The Rain Makers 
+          span Rainmaking Loft
+          |  London, 2587-4577
+        |                                 
+        ul.social-icons
+          li
+            a(href='#')
+              span  
+          |                                         
+          li.twitter
+            a(href='#')
+              span  
+          |                                         
+          li.gmail
+            a(href='#')
+              span  
+          |                                         
+          li.print
+            a(href='#')
+              span  
 
-block content
-  h1= title
-  p Welcome to #{title}
