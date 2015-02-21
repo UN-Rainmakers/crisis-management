@@ -7,7 +7,9 @@ var bodyParser = require('body-parser');
 
 var index_routes = require('./routes/index');
 var users = require('./routes/users');
+var constantcomment = require('./doodles');
 
+constantcomment.hello();
 var app = express();
 
 // view engine setup
