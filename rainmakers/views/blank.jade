@@ -1,0 +1,68 @@
+doctype html
+html
+  head
+    title The Rainmakers
+    link(href='stylesheets/bootstrap.css', rel='stylesheet', type='text/css', media='all')
+    script(src='javascripts/jquery.min.js')
+    link(href='stylesheets/style.css', rel='stylesheet', type='text/css', media='all')
+    meta(name='viewport', content='width=device-width, initial-scale=1, maximum-scale=1')
+    script(type='application/x-javascript').
+      addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); }
+    link(href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700', rel='stylesheet', type='text/css')
+  body
+    .header
+      .container
+        .logo
+          a(href='/')
+            img(src='images/logo.png', alt=' ')
+        .top-nav
+          span.menu  
+          ul
+            li.active
+              a.scroll(href='/') HOME 
+            li
+              a.scroll(href='/feedback') FEEDBACK
+            li
+              a.scroll(href='/map') MAP
+          script.
+            $("span.menu").click(function(){
+            $(".top-nav ul").slideToggle(500, function(){
+            });
+            });
+        .clearfix  
+    .content
+      .container
+        .donate
+          .donate-grid
+            block content_title
+          .sit-in
+            block body
+            .clearfix  
+      script(src='js/jquery.wmuSlider.js')
+      |                           
+      script.
+        $('.example1').wmuSlider({
+        pagination : false,
+        });
+    // footer
+    .footer
+      .container
+        span.drop  
+        p
+          The Rain Makers 
+          span Rainmaking Loft
+          |  London, 2587-4577
+        ul.social-icons
+          li
+            a(href='#')
+              span  
+          li.twitter
+            a(href='#')
+              span  
+          li.gmail
+            a(href='#')
+              span  
+          li.print
+            a(href='#')
+              span  
+

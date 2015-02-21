@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
+var index_routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
@@ -22,14 +22,40 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', routes);
+app.use('/', index_routes);
 app.use('/users', users);
 app.get('/feedback', function(req, res) {
   res.render('feedback', {
     title: 'Welcome'
   });
 });
+app.get('/map', function(req, res) {
+  res.render('map', {
+    title: 'Welcome'
+  });
+});
 
+app.get('/tester', function(req, res) {
+  var doodle = 'HERE IS A DOODLE';
+var accountSid = 'ACf5e175f913bd96a8be7a9ddb3af7433f'; 
+var authToken = 'c831c407d108bfb24c40096964bd7462'; 
+ 
+var client = require('twilio')(accountSid, authToken); 
+var newlist = [];
+client.messages.list({    
+ }, function(err, data) { 
+ 	data.messages.forEach(function(message) { 
+        newlist.push(message.sid);
+        console.log(newlist);
+ 		 	}); 
+	var hoola = JSON.stringify(newlist)
+  res.render('tester', {
+    title: 'Welcome DOODLE', 
+    posts: hoola
+  });
+ 		 	});
+
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
