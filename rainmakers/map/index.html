@@ -13,52 +13,129 @@
 	<link rel="stylesheet" href="css/MarkerCluster.Default.css" />
 	<script src="js/leaflet.markercluster-src.js"></script>
 	<script src="https://code.jquery.com/jquery-1.11.2.js"></script>
-	<!-- <script src="js/realworld.388.js"></script> -->
+
+	<style>
+.menu-ui {
+  background:#fff;
+  position:absolute;
+  top:10px;right:10px;
+  z-index:1;
+  border-radius:3px;
+  width:120px;
+  border:1px solid rgba(0,0,0,0.4);
+  }
+  .menu-ui a {
+    font-size:13px;
+    color:#404040;
+    display:block;
+    margin:0;padding:0;
+    padding:10px;
+    text-decoration:none;
+    border-bottom:1px solid rgba(0,0,0,0.25);
+    text-align:center;
+    }
+    .menu-ui a:first-child {
+      border-radius:3px 3px 0 0;
+      }
+    .menu-ui a:last-child {
+      border:none;
+      border-radius:0 0 3px 3px;
+      }
+    .menu-ui a:hover {
+      background:#f8f8f8;
+      color:#404040;
+      }
+    .menu-ui a.active,
+    .menu-ui a.active:hover {
+      background:#3887BE;
+      color:#FFF;
+      }
+</style>
 
 </head>
 <body>
+	<nav id='menu-ui' class='menu-ui'>
+	  <a href='#' class='active' id='filter-all'>all</a>
+	  <a href='#' id='filter-water'>water</a>
+	  <a href='#' id='filter-food'>food</a>
+	</nav>
 
 	<div id="map"></div>
 	<span>Mouse over a cluster to see the bounds of its children and click a cluster to zoom to those bounds</span>
 	<script type="text/javascript">
 
-		//
 		var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-				maxZoom: 15,
-				attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
+		maxZoom: 15,
+		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
 			}),
-			latlng = L.latLng(51.50, -0.07); 
+			latlng = L.latLng(0, -0); 
 
-		var map = L.map('map', {center: latlng, zoom: 13, layers: [tiles]});
+		var map = L.map('map', {center: latlng, zoom: 2, layers: [tiles]});
+	  //       all = document.getElementById('filter-all'),
+			// water = document.getElementById('filter-water'),
+			// food = document.getElementById('filter-food');
 
 		var markers = L.markerClusterGroup();
 
-// addressPoints is the link to the json file that holds the data
 
-		
+	// food.onclick = function(e) {
+ //        all.className = '';
+ //        water.className = '';
+ //        this.className = 'active';
+ //        // The setFilter function takes a GeoJSON feature object
+ //        // and returns true to show it or false to hide it.
+ //        map.featureLayer.setFilter(function(f) {
+ //            return f.properties['leaflet-popup-content'] === 'Incedent';
+ //        });
+ //        return false;
+ //    };
 
-$.ajax({
-    type: "GET",
-    url: "http://un-rainmakers.winder.nom.za/api/Report",
-    contentType: "application/javascript"
-}).done(function(data){
+ //    water.onclick = function(e) {
+ //        food.className = '';
+ //        this.className = 'active';
+ //        // The setFilter function takes a GeoJSON feature object
+ //        // and returns true to show it or false to hide it.
+ //        map.featureLayer.setFilter(function(f) {
+ //            return f.properties['leaflet-popup-content'] === 'Incedent';
+ //        });
+ //        return false;
+ //    };
 
-	$(data).each(function(){
-		console.log(this.Lat);
-		console.log(this.Lon);
-		console.log(this.Incedent);
-		if(this.Lat && this.Lon){
-			var marker = L.marker(new L.LatLng(this.Lat, this.Lon), { title: this.Incedent });
-		
-			marker.bindPopup(this.Incedent);
-		
-			markers.addLayer(marker);
-		}
-	})
+ //    all.onclick = function() {
+ //        food.className = '';
+ //        water.className = '';
+ //        this.className = 'active';
+ //        map.featureLayer.setFilter(function(f) {
+ //            // Returning true for all markers shows everything.
+ //            return true;
+ //        });
+ //        return false;
+ //    };
 
-	map.addLayer(markers);
+		// database call		
 
-})
+		$.ajax({
+		    type: "GET",
+		    url: "http://un-rainmakers.winder.nom.za/api/Report",
+		    contentType: "application/javascript"
+		}).done(function(data){
+
+			$(data).each(function(){
+				console.log(this.Lat);
+				console.log(this.Lon);
+				console.log(this.Incedent);
+				if(this.Lat && this.Lon){
+					var marker = L.marker(new L.LatLng(this.Lat, this.Lon), { title: this.Incedent });
+				
+					marker.bindPopup(this.Incedent);
+				
+					markers.addLayer(marker);
+				}
+			})
+
+			map.addLayer(markers);
+
+		})
 
 	</script>
 </body>
