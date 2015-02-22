@@ -2,14 +2,48 @@ extends ./blank.jade
 
 
 block content_title
-  p Hello World
+    p Hello World
 
+block head
+    title Leaflet test page
+    link(rel='stylesheet', href='css/leaflet.css')
+    script(src='js/leaflet.js')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', href='css/screen.css')
+    link(rel='stylesheet', href='css/MarkerCluster.css')
+    link(rel='stylesheet', href='css/MarkerCluster.Default.css')
+    script(src='js/leaflet.markercluster-src.js')
+    script(src='https://code.jquery.com/jquery-1.11.2.js')
 block body
-            script(src='javascripts/hello.js')
-            .col-md-12.ad-in
-              h5 IS THIS WORKING
-              p
-                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu
-              p
-                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
+    #map
+    span
+      | Mouse over a cluster to see the bounds of its children and click a cluster to zoom to those bounds
+    script(type='text/javascript').
+      var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      maxZoom: 15,
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
+      }),
+      latlng = L.latLng(0, -0);
+      var map = L.map('map', {center: latlng, zoom: 2, layers: [tiles]});
+      var markers = L.markerClusterGroup();
+      //      database call
+      $.ajax({
+      type: "GET",
+      url: "http://un-rainmakers.winder.nom.za/api/Report?__limit=5000",
+      contentType: "application/javascript"
+      }).done(function(data){
+      $(data).each(function(){
+      console.log(this.Lat);
+      console.log(this.Lon);
+      console.log(this.Incedent);
+      if(this.Lat && this.Lon){
+      var marker = L.marker(new L.LatLng(this.Lat, this.Lon), { title: this.Incedent });
+      marker.bindPopup(this.Incedent).addTo(markers);;
+      markers.addLayer(marker);
+      }
+      })
+      var layersControl = L.control.layers();
+      layersControl.addOverlay(markers, 'incidents').addTo(map);
+      map.addLayer(markers);
+      })
 
