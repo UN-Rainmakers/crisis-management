@@ -1,7 +1,8 @@
 #map {
-	width: 800px; 
+	width: 95%; 
 	height: 600px; 
 	border: 1px solid #ccc;
+	margin-left: 2.5%;
 }
 
 #progress {
