@@ -7,7 +7,8 @@ var bodyParser = require('body-parser');
 
 var index_routes = require('./routes/index');
 var users = require('./routes/users');
-var feedback_two = require('./routes/feedback');
+var about = require('./routes/about');
+var feedback = require('./routes/feedback');
 
 
 var constantcomment = require('./sms');
@@ -29,8 +30,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index_routes);
+app.use('/about', about);
 app.use('/users', users);
-app.use('/feedback_two', feedback_two);
+app.use('/feedback', feedback);
 
 app.get('/feedback', function(req, res) {
   res.render('feedback', {
