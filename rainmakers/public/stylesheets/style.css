@@ -202,17 +202,36 @@ ul.callbacks_tabs.callbacks1_tabs {
 	padding:4em 0;
 }
 .ad-in h5{
-	font-size:1.7em;
+	font-size:1.1em;
 	color:#ff0505;
+	font-weight: 600;
+	text-transform:uppercase;
+}
+.ad-in h3{
+	font-size:2em;
+	color:#000;
 	font-weight: 700;
 	text-transform:uppercase;
 }
 .ad-in p{
-	font-size:1em;
+	font-size:0.7em;
 	color:#888;
-	font-weight: 700;
+	font-weight: 500;
 	margin: 1.3em 0;
 	line-height: 1.6em;
+	text-transform: none;
+}
+.ad-in h4{
+	font-size:1em;
+	color:#888;
+	font-weight: 500;
+	margin: 1.3em 0;
+	line-height: 1.6em;
+	text-transform: none;
+}
+.ad-in img{
+	margin-top: 10px;
+	width:250px;
 }
 /*----*/
 /* General button style (reset) */
@@ -1364,6 +1383,10 @@ ul.callbacks_tabs.callbacks1_tabs {
 .donate-grid p {
 	font-size: 1em;
 	height: 41px;
+}
+.donate-grid h3 {
+	font-size: 1.5em;
+	color:black;
 }
 .ad-in h5 {
 	font-size: 1.2em;
