@@ -15,13 +15,16 @@ client.messages.list({
     if( data == 'undefined' || typeof data == 'undefined'){
       return;
     }
- 	data.messages.forEach(function(message) { 
- 		if(message.direction.match(/inbound/i)){
- 			console.log(message.body);
- 			response.send(message.body);
- 			return;
- 		}; 		
- 	});	
+	var matches = data.messages.filter(function(message){
+		return message && message.direction && message.direction.match(/inbound/i);
+	});
+	if (matches.length>0) {
+		message = matches[0];
+		console.log(message.body);
+		response.send(message.body);
+	} else {
+		response.send("nomatch");
+	}
 });
 };
 
