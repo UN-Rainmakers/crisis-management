@@ -25,6 +25,11 @@ var options = {
 
 client.messages.list({    
 }, function(err, data) { 
+
+    //defensive check
+    if( data == 'undefined' || typeof data == 'undefined'){
+      return;
+    }
     data.messages.forEach(function(message) { 
 
         var elapsed = Date.now() - Date.parse(message.dateSent);
@@ -44,10 +49,51 @@ client.messages.list({
             }
         }
 
+        //LOCATION:pick a random location for now, as we only have UK country codes for text messages
+        var rand = Math.floor(Math.random() * 6) + 1;
+        if(rand == 1){
+          var lat = "15.714"; var lon = "-1.384"; //Sudan
+        } else if(rand == 2){
+          var lat = "15.714"; var lon = "-1.384"; //Mali
+        } else if(rand == 3){
+            var lat = "-17.979";var lon = "-67.05"; //Bolivia
+        } else if(rand == 4){
+            var lat = "34.629";var lon = "75.87"; //Kashmir
+        } else if(rand == 5){
+            var lat = "36.194";var lon = "54.315"; //Iran 
+        } else if(rand == 6){
+            var lat = "-3.430";var lon = "17.377"; //Congo
+        };
+
+        //INCIDENTS:parse messages to populate incident in database
+        if(message.body.match(/good/i) && message.body.match(/t/i)){
+          var incident = "Good - Getting Things";
+        } else if(message.body.match(/good/i) && message.body.match(/p/i)){
+          var incident = "Good - People";
+        }else if(message.body.match(/good/i) && message.body.match(/o/i)){
+          var incident = "Good - Others";
+        }else if(message.body.match(/bad/i) && message.body.match(/v/i)){
+          var incident = "Bad - Violence";
+        }else if(message.body.match(/bad/i) && message.body.match(/s/i)){
+          var incident = "Bad - Sexual Misconduct";
+        }else if(message.body.match(/bad/i) && message.body.match(/p/i)){
+          var incident = "Bad - Broken Promise";
+        }else if(message.body.match(/bad/i) && message.body.match(/c/i)){
+          var incident = "Bad - Suspected Corruption";
+        }else if(message.body.match(/bad/i) && message.body.match(/n/i)){
+          var incident = "Bad - Insult";
+        }else if(message.body.match(/bad/i) && message.body.match(/o/i)){
+          var incident = "Bad - Others";
+        }else{
+          var incident = message.body;
+        }
+
         //send request to persist in silverstripe database
         var data = JSON.stringify({
-              Incedent: message.body,
-              MessageID: message.sid
+              Incedent: incident,
+              MessageID: message.sid,
+              Lon: lon,
+              Lat: lat,
             });
 
          var req = http.request(options, function(res) {
@@ -70,11 +116,17 @@ client.messages.list({
             console.log( "Attempting to reply");
 
             if(message.body.match(/good/i)){
-                var response = "Thank you!!";
+                var response = "Thank you for your response. We have noted your feedback. ";
+                response = response.concat( "For safety reasons please delete this message now." );
             }
             else if(message.body.match(/bad/i)){
-                var response = "We are sorry";
+                var response = "We are sorry, your feedback is looked into with urgency. ";
+                response = response.concat( "For safety reasons please delete this message now." );
+            } else{
+                var response = "Sorry, we are unable to understand your feedback. ";
+                response = response.concat( "Please visit www.rainmakers.com/feedback for eligible SMS codes.");
             }
+
             client.messages.create({
                 body: response,
                 to: key,
