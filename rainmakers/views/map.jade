@@ -4,15 +4,14 @@ extends ./blank.jade
 block content_title
     p Hello World
 
-block head
-    title Leaflet test page
-    link(rel='stylesheet', href='css/leaflet.css')
-    script(src='js/leaflet.js')
+block append head
+    link(rel='stylesheet', href='stylesheets/leaflet.css')
+    script(src='javascripts/leaflet.js')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    link(rel='stylesheet', href='css/screen.css')
-    link(rel='stylesheet', href='css/MarkerCluster.css')
-    link(rel='stylesheet', href='css/MarkerCluster.Default.css')
-    script(src='js/leaflet.markercluster-src.js')
+    link(rel='stylesheet', href='stylesheets/screen.css')
+    link(rel='stylesheet', href='stylesheets/MarkerCluster.css')
+    link(rel='stylesheet', href='stylesheets/MarkerCluster.Default.css')
+    script(src='javascripts/leaflet.markercluster-src.js')
     script(src='https://code.jquery.com/jquery-1.11.2.js')
 block body
     #map
