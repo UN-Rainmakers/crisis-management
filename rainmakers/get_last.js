@@ -19,6 +19,7 @@ client.messages.list({
  		if(message.direction.match(/inbound/i)){
  			console.log(message.body);
  			response.send(message.body);
+ 			return;
  		}; 		
  	});	
 });
