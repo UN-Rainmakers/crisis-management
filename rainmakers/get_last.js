@@ -11,7 +11,15 @@ var auth_token = 'c831c407d108bfb24c40096964bd7462';
 var client = require('twilio')(account_sid, auth_token); 
 client.messages.list({    
  }, function(err, data) { 
- 	response.send(data.messages[0]);
+ 	//defensive check
+    if( data == 'undefined' || typeof data == 'undefined'){
+      return;
+    }
+ 	data.messages.forEach(function(message) { 
+ 		if(message.direction.match(/inbound/i)){
+ 			response.send(data.message.body);
+ 		}; 		
+ 	};	
 });
 };
 
