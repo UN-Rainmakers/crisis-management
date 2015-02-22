@@ -66,6 +66,7 @@ client.messages.list({
        var message = groups[key];
        console.log(message.direction);
        if(message.direction.match(/inbound/i)){
+	    
             console.log( "Attempting to reply");
 
             if(message.body.match(/good/i)){

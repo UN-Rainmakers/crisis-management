@@ -7,9 +7,13 @@ var bodyParser = require('body-parser');
 
 var index_routes = require('./routes/index');
 var users = require('./routes/users');
-var constantcomment = require('./sms');
+var feedback_two = require('./routes/feedback');
 
+
+var constantcomment = require('./sms');
 constantcomment.hello();
+
+var get_last = require('./get_last');
 var app = express();
 
 // view engine setup
@@ -26,6 +30,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index_routes);
 app.use('/users', users);
+app.use('/feedback_two', feedback_two);
+
 app.get('/feedback', function(req, res) {
   res.render('feedback', {
     title: 'Welcome'
@@ -35,6 +41,11 @@ app.get('/map', function(req, res) {
   res.render('map', {
     title: 'Welcome'
   });
+});
+
+app.get('/get_last', function(req, res) {
+console.log('hello world');
+return get_last.last();
 });
 
 app.get('/tester', function(req, res) {
@@ -48,9 +59,10 @@ client.messages.list({
  }, function(err, data) { 
  	data.messages.forEach(function(message) { 
         newlist.push(message.sid);
+        newlist.push(message.sid);
         console.log(newlist);
  		 	}); 
-	var hoola = JSON.stringify(newlist)
+	var hoola = newlist
   res.render('tester', {
     title: 'Welcome DOODLE', 
     posts: hoola
