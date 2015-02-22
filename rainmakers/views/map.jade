@@ -1,0 +1,48 @@
+extends ./blank.jade
+
+
+block content_title
+    p Hello World
+
+block append head
+    link(rel='stylesheet', href='stylesheets/leaflet.css')
+    script(src='javascripts/leaflet.js')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet', href='stylesheets/screen.css')
+    link(rel='stylesheet', href='stylesheets/MarkerCluster.css')
+    link(rel='stylesheet', href='stylesheets/MarkerCluster.Default.css')
+    script(src='javascripts/leaflet.markercluster-src.js')
+    script(src='https://code.jquery.com/jquery-1.11.2.js')
+block body
+    #map
+    span
+      | Mouse over a cluster to see the bounds of its children and click a cluster to zoom to those bounds
+    script(type='text/javascript').
+      var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+      maxZoom: 15,
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
+      }),
+      latlng = L.latLng(0, -0);
+      var map = L.map('map', {center: latlng, zoom: 2, layers: [tiles]});
+      var markers = L.markerClusterGroup();
+      //      database call
+      $.ajax({
+      type: "GET",
+      url: "http://un-rainmakers.winder.nom.za/api/Report?__limit=5000",
+      contentType: "application/javascript"
+      }).done(function(data){
+      $(data).each(function(){
+      console.log(this.Lat);
+      console.log(this.Lon);
+      console.log(this.Incedent);
+      if(this.Lat && this.Lon){
+      var marker = L.marker(new L.LatLng(this.Lat, this.Lon), { title: this.Incedent });
+      marker.bindPopup(this.Incedent).addTo(markers);;
+      markers.addLayer(marker);
+      }
+      })
+      var layersControl = L.control.layers();
+      layersControl.addOverlay(markers, 'incidents').addTo(map);
+      map.addLayer(markers);
+      })
+
