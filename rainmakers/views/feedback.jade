@@ -1,14 +1,8 @@
-extends ./layout.jade
+extends ./blank.jade
 
-block content_title
-  p Hello World
-
-block body
-            .col-md-12.ad-in
-              h5 IS THIS WORKING
-              p
-                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu
-              p
-                Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo
-              #container
-              script(src='javascripts/intervaller.js')
+block append head
+	link(rel='stylesheet', href='stylesheets/blank.css')
+block container
+	.top_head
+		#container
+		script(src='javascripts/intervaller.js')
