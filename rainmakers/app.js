@@ -40,7 +40,7 @@ app.get('/feedback', function(req, res) {
   });
 });
 app.get('/map', function(req, res) {
-  res.render('map', {
+  res.render('maptwo', {
     title: 'Welcome'
   });
 });
