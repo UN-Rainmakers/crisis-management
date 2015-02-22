@@ -1,8 +1,6 @@
 extends ./blank.jade
 
 
-block content_title
-    p Hello World
 
 block append head
     link(rel='stylesheet', href='stylesheets/leaflet.css')
@@ -11,12 +9,14 @@ block append head
     link(rel='stylesheet', href='stylesheets/screen.css')
     link(rel='stylesheet', href='stylesheets/MarkerCluster.css')
     link(rel='stylesheet', href='stylesheets/MarkerCluster.Default.css')
+    link(rel='stylesheet', href='stylesheets/blank.css')
     script(src='javascripts/leaflet.markercluster-src.js')
     script(src='https://code.jquery.com/jquery-1.11.2.js')
-block body
+block container
+ .top_head.center
     #map
     span
-      | Mouse over a cluster to see the bounds of its children and click a cluster to zoom to those bounds
+      | Mouse over a cluster to see statistics of SMS feedback as well as a community well being score
     script(type='text/javascript').
       var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
       maxZoom: 15,
