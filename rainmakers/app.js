@@ -43,10 +43,7 @@ app.get('/map', function(req, res) {
   });
 });
 
-app.get('/get_last', function(req, res) {
-console.log('hello world');
-return get_last.last();
-});
+app.get('/get_last', get_last);
 
 app.get('/tester', function(req, res) {
   var doodle = 'HERE IS A DOODLE';
