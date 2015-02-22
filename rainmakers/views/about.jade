@@ -3,10 +3,8 @@ extends ./blank.jade
 block append head
   link(href='stylesheets/blank.css', rel='stylesheet', type='text/css')
 block container
- .wrapper 
-   .section
+ .wrapper.container
       .ad-in.top_head
-        h3 THE TEAM
          .grid
             .col-md-3.ad-in
                   h5 Teresa 
@@ -25,10 +23,9 @@ block container
                   img(src='images/kevin.jpg', alt='')
                   p Kevin is a coder
           .clearfix
-      p We would also like to thank Richard, Rayla and Harsimran for their contribution.
- .wrapper
-   .section 
-    .ad-in.top_head
-      h3 HOW WE STARTED
-        .col-md.ad-in
+      .ad-in
+        p We would also like to thank Richard, Rayla and Harsimran for their contribution.
+
+      .description
+        h3 HOW WE STARTED
           p One day, in the Rainmaking Loft at 1 St. Katherine's Way, London, 7 strangers and not-so-strangers formed a team during a hackathon aimed at using digital innovation to help the public engage better with the UN. This idea inspired us to create a platform to help the public gauge how the UN is doing.
