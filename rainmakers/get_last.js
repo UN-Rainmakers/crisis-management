@@ -19,8 +19,8 @@ client.messages.list({
 		return message && message.direction && message.direction.match(/inbound/i);
 	});
 	if (matches.length>0) {
-		// var message = matches[0]; // First
-		var message = matches[matches.length-1]; // Last
+		var message = matches[0]; // First
+		// var message = matches[matches.length-1]; // Last
 		// var message = matches[Math.floor(Math.random() * myArray.length)]; // random
 		console.log("Have message:",message.body);
 		response.send(message.body);
