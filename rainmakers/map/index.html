@@ -17,47 +17,49 @@
 <body>
 
 	<div id="map"></div>
-	<span>Mouse over a cluster to see the bounds of its children and click a cluster to zoom to those bounds</span>
+	<span>mouse over a cluster to see the bounds of its children and click a cluster to zoom to those bounds</span>
 	<script type="text/javascript">
-
-		var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-		maxZoom: 15,
-		attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
-			}),
-			latlng = L.latLng(0, -0); 
-
-		var map = L.map('map', {center: latlng, zoom: 2, layers: [tiles]});
-
+		
 		var markers = L.markerClusterGroup();
 
+		var crisis = new L.LayerGroup();
+				L.marker([15.71, -1.38]).bindPopup('<p>Mali<br />CSI score: 12 n = 1439<br />SMS feedback: 10 (positive) 79 (negative) n = 89<br />Last update: 22.02.2015').addTo(crisis),
+				L.marker([34.62, 75.87]).bindPopup('Kashmir').addTo(crisis);
 
+		var tiles = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+			maxZoom: 15,
+			attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
+				}),
+			latlng = L.latLng(0, -0); 
+
+		var map = L.map('map', {
+			center: latlng, 
+			zoom: 2, 
+			layers: [tiles, markers, crisis]
+		});
+
+	
 	//	database call		
-
 		$.ajax({
 		    type: "GET",
 		    url: "http://un-rainmakers.winder.nom.za/api/Report?__limit=5000",
 		    contentType: "application/javascript"
 		}).done(function(data){
-
 			$(data).each(function(){
 				console.log(this.Lat);
 				console.log(this.Lon);
 				console.log(this.Incedent);
 				if(this.Lat && this.Lon){
 					var marker = L.marker(new L.LatLng(this.Lat, this.Lon), { title: this.Incedent });
-
 					marker.bindPopup(this.Incedent).addTo(markers);;
-
 					markers.addLayer(marker);
 				}
 			})
 
 		var layersControl = L.control.layers();
 
-		layersControl.addOverlay(markers, 'incidents').addTo(map);
-
+		layersControl.addOverlay(crisis, 'Crisis').addOverlay(markers, 'Incidents').addTo(map);
 		map.addLayer(markers);
-
 		})
 
 	</script>
