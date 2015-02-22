@@ -9,6 +9,8 @@ var index_routes = require('./routes/index');
 var users = require('./routes/users');
 var about = require('./routes/about');
 var feedback = require('./routes/feedback');
+var directions = require('./routes/directions');
+var resources = require('./routes/resources');
 
 
 var constantcomment = require('./sms');
@@ -33,6 +35,8 @@ app.use('/', index_routes);
 app.use('/about', about);
 app.use('/users', users);
 app.use('/feedback', feedback);
+app.use('/directions', directions);
+app.use('/resources', resources);
 
 app.get('/feedback', function(req, res) {
   res.render('feedback', {
